@@ -5,24 +5,21 @@ import { MdArrowDropDown } from "react-icons/md";
 const Classselection = ({ setClassSelection }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [destinationAirport, setDestinationAirport] = useState("SDF");
+  const [selectedOption, setSelectedOption] = useState("Economy");
   const [filteredOptions, setFilteredOptions] = useState([
     "Economy",
     "Business",
     "First",
   ]);
-  const [isEditing, setIsEditing] = useState(false);
 
   const handleButtonClick = () => {
     setShowMenu(!showMenu);
-    setIsEditing(true);
   };
 
-  const handleMenuItemClick = (airport) => {
-    setDestinationAirport(airport);
-    setClassSelection(airport);
+  const handleMenuItemClick = (option) => {
+    setSelectedOption(option);
+    setClassSelection(option);
     setShowMenu(false);
-    setIsEditing(false);
     setInputValue("");
   };
 
@@ -39,7 +36,7 @@ const Classselection = ({ setClassSelection }) => {
   return (
     <div
       style={{
-        fontFamily:'sans-serif',
+        fontFamily: 'sans-serif',
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -58,10 +55,13 @@ const Classselection = ({ setClassSelection }) => {
             alignItems: "center",
             justifyContent: "space-between",
             position: "relative",
+            cursor: "pointer",
+            boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.25)',
+            borderRadius: '4px',
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", flex: 1,fontFamily:'sans-serif' }}>
-            <div style={{fontSize:'13px',marginTop:'0.5rem'}}>Cabin Selection</div>
+          <div style={{ display: "flex", flexDirection: "column", flex: 1, fontFamily: 'sans-serif' }}>
+            <div style={{ fontSize: '13px', marginTop: '0.5rem' }}>Cabin Selection</div>
             <div
               style={{
                 marginTop: ".2rem",
@@ -69,27 +69,7 @@ const Classselection = ({ setClassSelection }) => {
                 alignItems: "center",
               }}
             >
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={inputValue}
-                  onChange={handleInputChange}
-                  placeholder='economy'
-                  style={{
-                    width: "100%",
-                    padding: ".3125rem",
-                    borderRadius: ".2rem",
-                    border: ".05rem solid #181818",
-                    background: "#181818",
-                    color: "white",
-                    marginTop:'12px',
-                    marginRight:'3rem',
-                    
-                  }}
-                />
-              ) : (
-                <div style={{marginTop:'5px'}}>economy</div>
-              )}
+              <div style={{ marginTop: '5px', textTransform: 'lowercase'  }}>{selectedOption}</div>
             </div>
           </div>
           <div style={{ marginLeft: "auto" }}>
@@ -115,14 +95,13 @@ const Classselection = ({ setClassSelection }) => {
                 style={{
                   width: "14rem",
                   height: "2.8125rem",
-                  background: "#181818",
+                  background: selectedOption === option ? "#1b251a" : "#181818",
                   display: "flex",
                   alignItems: "center",
                   paddingLeft: ".625rem",
                   marginBottom: ".3125rem",
                   borderRadius: ".25rem",
-                  cursor: "pointer",
-                  color: "#fff",
+                  cursor: "pointer"
                 }}
               >
                 {option}

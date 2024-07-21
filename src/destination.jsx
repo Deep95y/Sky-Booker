@@ -4,7 +4,10 @@ import { MdArrowDropDown } from "react-icons/md";
 
 const Destination = ({ setDestination }) => {
   const [showMenu, setShowMenu] = useState(false);
-  const [destinationAirport, setDestinationAirport] = useState("SDF");
+  const [destinationAirport, setDestinationAirport] = useState("DEL");
+  const [filteredAirports, setFilteredAirports] = useState([
+    "JFK", "DEL", "SYD", "LHR", "CDG", "DOH", "SIN"
+  ]);
 
   const handleButtonClick = () => {
     setShowMenu(!showMenu);
@@ -12,140 +15,88 @@ const Destination = ({ setDestination }) => {
 
   const handleMenuItemClick = (airport) => {
     setDestinationAirport(airport);
-    setShowMenu(false);
     setDestination(airport);
+    setShowMenu(false);
   };
 
   return (
-    <>
-      <div
-        style={{
-          fontFamily:'sans-serif',
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <div style={{}}>
-          <div className="dropdown" style={{ marginTop: "10%" }}>
+    <div
+      style={{
+        fontFamily: 'sans-serif',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <div className="dropdown" style={{ marginTop: "10%" }}>
+        <div
+          onClick={handleButtonClick}
+          className="dropdown-button"
+          style={{
+            width: "14.375rem",
+            height: "2.4rem",
+            background: "#181818",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            position: "relative",
+            cursor: "pointer",
+            boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.25)',
+            borderRadius: '4px',
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+            <div style={{ fontSize: '13px', marginTop: '0.5rem' }}>Destination</div>
             <div
-              onClick={handleButtonClick}
-              className="dropdown-button"
               style={{
-                width: "14.375rem",
-                height: "2.4rem",
-                background: "#181818",
+                marginTop: ".2rem",
                 display: "flex",
-                flexDirection: "row",
+                alignItems: "center"
               }}
             >
-              <div
-                style={{
-                  position: "absolute",
-                  marginLeft: "75%",
-                  marginTop: "3%",
-                }}
-              >
-                <MdArrowDropDown color="white" style={{ fontSize: "1.5625rem" }} />
-              </div>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <div style={{fontSize:'13px'}}>Destination</div>
-                <div style={{ marginTop: ".2rem" }}>{destinationAirport}</div>
-              </div>
+              {destinationAirport}
             </div>
-
-            {showMenu && (
-              <div className="dropdown-menu">
-                <div
-                  onClick={() => handleMenuItemClick("JFK")}
-                  className="dropdown-menu-item"
-                  style={{
-                    width: "14.8125rem",
-                    height: "2.8125rem",
-                    background: "#181818",
-                    display: "flex",
-                  }}
-                >
-                  JFK
-                </div>
-                <div
-                  onClick={() => handleMenuItemClick("DEL")}
-                  className="dropdown-menu-item"
-                  style={{
-                    width: "14.8125rem",
-                    height: "2.8125rem",
-                    background: "#181818",
-                    display: "flex",
-                  }}
-                >
-                  DEL
-                </div>
-                <div
-                  onClick={() => handleMenuItemClick("SYD")}
-                  className="dropdown-menu-item"
-                  style={{
-                    width: "14.8125rem",
-                    height: "2.8125rem",
-                    background: "#181818",
-                    display: "flex",
-                  }}
-                >
-                  SYD
-                </div>
-                <div
-                  onClick={() => handleMenuItemClick("LHR")}
-                  className="dropdown-menu-item"
-                  style={{
-                    width: "14.8125rem",
-                    height: "2.8125rem",
-                    background: "#181818",
-                    display: "flex",
-                  }}
-                >
-                  LHR
-                </div>
-                <div
-                  onClick={() => handleMenuItemClick("CDG")}
-                  className="dropdown-menu-item"
-                  style={{
-                    width: "14.8125rem",
-                    height: "2.8125rem",
-                    background: "#181818",
-                    display: "flex",
-                  }}
-                >
-                  CDG
-                </div>
-                <div
-                  onClick={() => handleMenuItemClick("DOH")}
-                  className="dropdown-menu-item"
-                  style={{
-                    width: "14.8125rem",
-                    height: "2.8125rem",
-                    background: "#181818",
-                    display: "flex",
-                  }}
-                >
-                  DOH
-                </div>
-                <div
-                  onClick={() => handleMenuItemClick("SIN")}
-                  className="dropdown-menu-item"
-                  style={{
-                    width: "14.8125rem",
-                    height: "2.8125rem",
-                    background: "#181818",
-                    display: "flex",
-                  }}
-                >
-                  SIN
-                </div>
-              </div>
-            )}
+          </div>
+          <div style={{ marginLeft: "auto" }}>
+            <MdArrowDropDown color="white" style={{ fontSize: "1.5625rem" }} />
           </div>
         </div>
+
+        {showMenu && (
+          <div
+            className="dropdown-menu"
+            style={{
+              marginTop: ".625rem",
+              background: "#181818",
+              padding: ".625rem",
+              borderRadius: ".25rem",
+              width: "14.375rem",
+            }}
+          >
+            {filteredAirports.map((airport) => (
+              <div
+                key={airport}
+                onClick={() => handleMenuItemClick(airport)}
+                className="dropdown-menu-item"
+                style={{
+                  width: "100%",
+                  height: "2.8125rem",
+                  background: destinationAirport === airport ? "#1b251a" : "#181818",
+                  display: "flex",
+                  alignItems: "center",
+                  paddingLeft: ".625rem",
+                  marginBottom: ".3125rem",
+                  borderRadius: ".25rem",
+                  cursor: "pointer"
+                }}
+              >
+                {airport}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

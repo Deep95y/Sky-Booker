@@ -42,7 +42,9 @@ const styles = {
     marginTop: '8%',
     padding: '0.5rem',
     boxSizing: 'border-box',
-    fontFamily:'sans-serif'
+    fontFamily:'sans-serif',
+    boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.25)',
+    borderRadius: '4px',
   },
   switchContainer: {
     marginLeft: '1rem',

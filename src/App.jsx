@@ -88,7 +88,7 @@ const App = () => {
           </button>
         </div>
       </div>
-      {hasSearched && (detail.length === 0 ? (
+      {hasSearched && (detail.data.length === 0 ? (
         <div style={{ marginTop: "5%", color: "#9a9e9a" }}>
           No flight details available
         </div>
