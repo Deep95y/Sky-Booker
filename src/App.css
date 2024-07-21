@@ -1,0 +1,105 @@
+/* DropdownButton.css */
+
+body{
+  margin:0;
+  background-color: #162015
+} 
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-button {
+  background-color: black;
+  color: #9a9e9a;
+  padding: .625rem 1.25rem;
+  border: none;
+  cursor: pointer;
+ 
+}
+
+.dropdown-button:hover {
+  background-color: gray;
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: black;
+  min-width: 10rem;
+  box-shadow: 0rem .5rem 1rem 0rem rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-top-style: inset;
+}
+
+.dropdown-menu-item {
+  color: #9a9e9a;
+  padding: .75rem 1rem;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown-menu-item:hover {
+  background-color: gray;
+}
+
+.search-button-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.search-button {
+  height: 2.3rem;
+  width: 5rem;
+  background: #37b9a7;
+  border: none;
+  border-radius: 0.3rem;
+  color: #a6f4ea;
+  font-family: sans-serif;
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+
+/* Responsive Styles
+@media (max-width: 1024px) {
+  .search-button-container {
+    right: 10%;
+    top: 30%;
+  }
+
+  .search-button {
+    height: 2.25rem;
+    width: 5.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-button-container {
+    right: 8%;
+    top: 28%;
+  }
+
+  .search-button {
+    height: 2rem;
+    width: 5.5rem;
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-button-container {
+    right: 5%;
+    top: 25%;
+  }
+
+  .search-button {
+    height: 1.75rem;
+    width: 5rem;
+    font-size: 0.75rem;
+  }
+} */

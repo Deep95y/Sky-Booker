@@ -1,0 +1,96 @@
+.flight-card-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+    max-width: 75rem;
+    flex-direction: row;
+    font-family: sans-serif;
+    padding-bottom: 2rem;
+  }
+  
+  .flight-card {
+    height: 27rem;
+    width: 11.25rem;
+    max-width: 15rem;
+    border-radius: 0.625rem;
+    background: #1a4c2f;
+    color: white;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    align-items: center;
+    padding-top: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .flight-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  
+  .partner-program,
+  .airport-info,
+  .departure-info,
+  .miles-label {
+    padding-top: 1rem;
+    text-align: center;
+  }
+  
+  .miles-info {
+    padding-top: 1.8rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .miles {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .plus {
+    margin-left: 0.3125rem;
+  }
+  
+  .tax {
+    margin-left: 0.625rem;
+  }
+  
+  .miles-na {
+    padding-top: 1.8rem;
+    text-align: center;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 48rem) {
+    .flight-card-container {
+      margin-top: 4%;
+      padding: 0 0.5rem;
+    }
+  
+    .flight-card {
+        width: calc(50% - 0.625rem);
+    }
+  }
+  
+  @media (max-width: 30rem) {
+    .flight-card {
+      width: 100%;
+      max-width: none;
+    }
+  
+    .miles-info {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .tax {
+      margin-left: 0;
+    }
+  }
+  
