@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 import { MdArrowDropDown } from "react-icons/md";
 
@@ -9,8 +9,10 @@ const Destination = ({ setDestination }) => {
     "JFK", "DEL", "SYD", "LHR", "CDG", "DOH", "SIN"
   ]);
 
+  const dropdownRef = useRef(null);
+
   const handleButtonClick = () => {
-    setShowMenu(!showMenu);
+    setShowMenu((prev) => !prev);
   };
 
   const handleMenuItemClick = (airport) => {
@@ -19,8 +21,25 @@ const Destination = ({ setDestination }) => {
     setShowMenu(false);
   };
 
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowMenu(false);
+    }
+  };
+
+  useEffect(() => {
+  
+    document.addEventListener("mousedown", handleClickOutside);
+
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div
+      ref={dropdownRef}
       style={{
         fontFamily: 'sans-serif',
         display: "flex",

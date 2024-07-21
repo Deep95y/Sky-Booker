@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 import { MdArrowDropDown } from "react-icons/md";
 
@@ -12,8 +12,10 @@ const Classselection = ({ setClassSelection }) => {
     "First",
   ]);
 
+  const dropdownRef = useRef(null);
+
   const handleButtonClick = () => {
-    setShowMenu(!showMenu);
+    setShowMenu(prev => !prev);
   };
 
   const handleMenuItemClick = (option) => {
@@ -27,14 +29,31 @@ const Classselection = ({ setClassSelection }) => {
     const value = event.target.value;
     setInputValue(value);
     setFilteredOptions(
-      ["Economy", "Business", "First"].filter((option) =>
+      ["Economy", "Business", "First"].filter(option =>
         option.toLowerCase().includes(value.toLowerCase())
       )
     );
   };
 
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowMenu(false);
+    }
+  };
+
+  useEffect(() => {
+  
+    document.addEventListener("mousedown", handleClickOutside);
+
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div
+      ref={dropdownRef}
       style={{
         fontFamily: 'sans-serif',
         display: "flex",
@@ -69,7 +88,7 @@ const Classselection = ({ setClassSelection }) => {
                 alignItems: "center",
               }}
             >
-              <div style={{ marginTop: '5px', textTransform: 'lowercase'  }}>{selectedOption}</div>
+              <div style={{ marginTop: '5px', textTransform: 'lowercase' }}>{selectedOption}</div>
             </div>
           </div>
           <div style={{ marginLeft: "auto" }}>
@@ -87,7 +106,7 @@ const Classselection = ({ setClassSelection }) => {
               borderRadius: ".25rem",
             }}
           >
-            {filteredOptions.map((option) => (
+            {filteredOptions.map(option => (
               <div
                 key={option}
                 onClick={() => handleMenuItemClick(option)}

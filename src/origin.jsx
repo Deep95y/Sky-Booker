@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 import { MdArrowDropDown } from "react-icons/md";
 
@@ -8,8 +8,11 @@ const Origin = ({ setOrigin }) => {
 
   const airports = ["JFK", "DEL", "SYD", "BOM", "BNE", "BLR"];
 
+ 
+  const dropdownRef = useRef(null);
+
   const handleButtonClick = () => {
-    setShowMenu(!showMenu);
+    setShowMenu((prev) => !prev);
   };
 
   const handleMenuItemClick = (airport) => {
@@ -18,8 +21,25 @@ const Origin = ({ setOrigin }) => {
     setOrigin(airport);
   };
 
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowMenu(false);
+    }
+  };
+
+  useEffect(() => {
+   
+    document.addEventListener("mousedown", handleClickOutside);
+
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div
+      ref={dropdownRef}
       style={{
         fontFamily: 'sans-serif',
         display: "flex",
@@ -27,13 +47,13 @@ const Origin = ({ setOrigin }) => {
         alignItems: "center",
         paddingTop: '1rem',
       }}
-    >
+    > 
       <div
         style={{
           color: "#9a9e9a",
           fontWeight: "bold",
           fontFamily: "sans-serif",
-          marginBottom: '1rem', // Changed from marginLeft to marginBottom
+          marginBottom: '1rem',
         }}
       >
         Choose Origin And Destination Airport

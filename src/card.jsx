@@ -7,10 +7,18 @@ const FlightCardContainer = ({
   destinationAirport,
   json_data,
 }) => {
-  console.log("Detail:", detail);
-  console.log("Selected Airport:", selectedAirport);
-  console.log("Destination Airport:", destinationAirport);
-  console.log("JSON Data:", json_data.departureTimeFrom);
+  
+console.log(json_data.departureTimeFrom);
+console.log(typeof(json_data.departureTimeFrom));
+
+const formatDate = (isoString) => {
+  const date = new Date(isoString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); 
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 
   return (
     <div className="flight-card-container">
@@ -25,11 +33,10 @@ const FlightCardContainer = ({
           </div>
           <div className="partner-program">{value.partner_program}</div>
           <div className="airport-info">
-            {selectedAirport} - {destinationAirport}
+            {selectedAirport} <img src="arrow-right-solid.svg" style={{ width:"0.8rem", backgroundcolor:"white"}}></img> {destinationAirport}
           </div>
           <div className="departure-info">
-            {json_data.departureTimeFrom.slice(0, 9)} -{" "}
-            {json_data.departureTimeTo.slice(0, 9)}
+          {formatDate(json_data.departureTimeFrom)} - {formatDate(json_data.departureTimeTo)}
           </div>
           {!value.min_business_miles ? (
             <div style={{fontWeight:'bold',fontSize:'20px'}}>N/A</div>
